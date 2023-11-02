@@ -1,5 +1,14 @@
 import { createCartLine, showCartContent } from './lib/ui.js';
 
+/**
+ * @typedef {Object} Product
+ * @property {number} id Auðkenni vöru, jákvæð heiltala stærri en 0.
+ * @property {string} title Titill vöru, ekki tómur strengur.
+ * @property {string} description Lýsing á vöru, ekki tómur strengur.
+ * @property {number} price Verð á vöru, jákvæð heiltala stærri en 0.
+ */
+
+
 const products = [
   {
     id: 1,
@@ -22,7 +31,11 @@ const products = [
   },
 ];
 
-/** Bæta vöru í körfu */
+/** Bæta vöru í körfu 
+ * @param {Product} product 
+ * @param {number} quantity 
+ * 
+*/
 function addProductToCart(product, quantity) {
   const cartTableBodyElement = document.querySelector('.cart table tbody');
 
@@ -54,6 +67,9 @@ function submitHandler(event) {
   // Finnum vöru með þessu productId
   const product = products.find((i) => i.id === productId);
 
+  if (!product) {
+    return;
+  }
   // TODO hér þarf að finna fjölda sem á að bæta við körfu með því að athuga
   // á input
   const quantity = 1;
